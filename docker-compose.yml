@@ -3,7 +3,7 @@ services:
 
   db:
     image: postgres
-    env_file: db.env
+    env_file: ./.env/db.env
     volumes:
       - ./docker/database:/var/lib/postgresql/data
     expose:
