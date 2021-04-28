@@ -1,0 +1,32 @@
+version: '3'
+services:
+
+  db:
+    image: postgres
+    env_file: db.env
+    volumes:
+      - ./docker/database:/var/lib/postgresql/data
+    expose:
+      - "5432"
+    ports:
+      - '5432:5432'
+    restart: "on-failure"
+
+  api:
+    build: ./todo-list-api/
+    restart: on-failure
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+
+  vue-ui:
+    build: ./todo_ui/
+    ports:
+      - "8081:8080"
+    volumes:
+       - ./todo-list-ui:/usr/src/app/my-app
+       - /usr/src/app/my-app/node_modules
+    depends_on:
+      - api
+    restart: "on-failure"
