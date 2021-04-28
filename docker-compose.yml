@@ -21,7 +21,7 @@ services:
       - db
 
   vue-ui:
-    build: ./todo_ui/
+    build: ./todo-list-ui/
     ports:
       - "8081:8080"
     volumes:
