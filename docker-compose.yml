@@ -1,32 +1,33 @@
 version: '3'
 services:
-
-  db:
-    image: postgres
-    env_file: ./.env/db.env
-    volumes:
-      - ./docker/database:/var/lib/postgresql/data
-    expose:
-      - "5432"
-    ports:
-      - '5432:5432'
-    restart: "on-failure"
-
-  api:
+  todo-api-web:
     build: ./todo-list-api/
-    restart: on-failure
-    ports:
-      - 8080:8080
+    image: todo-api:latest
+    container_name: todo-api-web
+    environment:
+      ENVIRONMENT: development
     depends_on:
       - db
+    volumes:
+      - ./todo-list-api/:/src
+      - ./todo-list-api/scripts:/scripts
+    command: ["/scripts/command-dev.sh"]
+    ports:
+      - "8000:8000"
+
+  db:
+    image: postgres:11
+    container_name: todo-api-db
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: "trust"
 
   vue-ui:
     build: ./todo-list-ui/
     ports:
-      - "8081:8080"
+      - "8080:8080"
     volumes:
        - ./todo-list-ui:/usr/src/app/my-app
        - /usr/src/app/my-app/node_modules
     depends_on:
-      - api
+      - todo-api-web
     restart: "on-failure"
