@@ -20,10 +20,17 @@ If you want to stop:
 $ docker-compose down
 ```
 
+If you want to Login the app:
+
+```
+$ user:admin
+$ password:admin
+```
+
 ### PORTS
 
-- VueJS = 8081
-- SpringBoot = 8080
+- VueJS = 8080
+- Django = 8000
 - POSTGRES = 5432
 
 ---
