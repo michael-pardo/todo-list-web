@@ -1,6 +1,6 @@
 ## TodoList Application
 
-simple todo list app with Django + docker + postgres + VueJS where as an user can see the total count of users and tasks registered in the system. and as a registered user, can login, create, update and delete tasks.
+simple todo list app with Django + docker + postgres + VueJS where as an user i can see the total count of users and tasks registered in the system. and as a registered user, can login, create, update and delete tasks.
 
 
 ---
